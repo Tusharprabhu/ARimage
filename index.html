@@ -3,52 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Model Viewer</title>
-    <style>
-        body { margin: 0; }
-        canvas { display: block; }
-    </style>
+    <title>3D Model AR Viewer</title>
 </head>
 <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <h1>View 3D Model in AR</h1>
+    <p>Click the link below to view the model in AR (Android only):</p>
+    
+    <!-- Replace 'YOUR_MODEL_URL' with the actual URL of the hosted GLB file -->
+    <a href="intent://arvr.google.com/scene-viewer/1.0?file=YOUR_MODEL_URL#Intent;scheme=https;package=com.google.android.googlequicksearchbox;action=android.intent.action.VIEW;S.browser_fallback_url=https://fallback.url;end;">
+        View Model
+    </a>
+
     <script>
-        // Scene, Camera, Renderer setup
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        // Load GLB file using GLTFLoader
-        const loader = new THREE.GLTFLoader();
-        loader.load('floorplan2.glb', function(gltf) {
-            scene.add(gltf.scene);
-            animate();
-        }, undefined, function(error) {
-            console.error(error);
-        });
-
-        // Lighting for better visibility
-        const light = new THREE.DirectionalLight(0xffffff, 1);
-        light.position.set(5, 10, 7.5).normalize();
-        scene.add(light);
-
-        // Set camera position
-        camera.position.z = 5;
-
-        // Animation loop
-        function animate() {
-            requestAnimationFrame(animate);
-            renderer.render(scene, camera);
-        }
-
-        // Handle window resizing
-        window.addEventListener('resize', () => {
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-        });
+        // Local server suggestion for testing
+        console.log("Ensure the GLB file is accessible via an HTTP server, like localhost.");
     </script>
 </body>
 </html>
